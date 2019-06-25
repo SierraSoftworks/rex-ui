@@ -9,14 +9,15 @@ import * as template from "text!./new-idea.html"
 import {
     IdeaV2, getRandomIdeaV2, postIdeaV2
 } from "../api/ideas";
+import { formatTime } from "../filters";
+
 @Component({
     template,
     components: {
         markdown: Markdown
     }
-
 })
-export default class IdeaView extends Vue {
+export default class NewIdeaView extends Vue {
     idea: IdeaV2 = {
         name: "",
         description: "",
@@ -29,10 +30,9 @@ export default class IdeaView extends Vue {
 
     postIdea(idea: IdeaV2) {
         postIdeaV2(idea).then(i => {
-            i.description = null;
-            i.name = null;
-            i.tags = null
+            //navigate to idea page
         }).catch(err => console.error(err));
+        //this.resetform.
     }
     navigate(name: string, opts?: RawLocation) {
         if (~name.indexOf("://")) return window.open(name, "_blank")
@@ -59,5 +59,12 @@ export default class IdeaView extends Vue {
         }
         this.inputVisible = false;
         this.inputValue = '';
+    }
+    resetform() {
+        this.idea.name = ""
+        this.idea.description = ""
+        this.idea.tags = []
+        this.idea.completed = false
+
     }
 }
