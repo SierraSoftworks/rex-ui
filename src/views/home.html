@@ -1,0 +1,20 @@
+<el-container>
+    <el-header>
+        <h1></h1>
+    </el-header>
+    <el-main>
+    
+    <p>
+            <markdown :value="markdown"></markdown>
+        </p>
+        <div v-if="idea">
+            <h2>{{ idea.name }}</h2>
+            <markdown :value="idea.description"></markdown>
+        </div>
+
+         <div>
+            <el-button type ="warning" plain @click="navigate('ideas')">Get Idea </el-button>
+            <el-button type ="danger" plain @click="navigate('new-idea')"> Create Idea!  </el-button>
+        </div>
+    </el-main>
+</el-container>

@@ -1,0 +1,45 @@
+<el-container>
+    <el-header>
+        <h1>Your new Creation</h1>
+    </el-header>
+    <el-main>
+        <div class="form">
+            <el-form ref="idea" :model="idea" label-width="120px">
+                <el-form-item label="Name">
+                    <el-input v-model="idea.name" placeholder=" give your idea a name ">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="Description">
+                    <el-input v-model="idea.description" placeholder=" enter a description of your idea"></el-input>
+                </el-form-item>
+                <el-form-item label="Tags">
+                   <el-tag 
+                        :key="tag"
+                        v-for="tag in idea.tags"
+                        closable
+                        :disable-transitions="false"
+                        @close="handleClose(tag)">
+                        {{tag}}</el-tag>
+                    <el-input
+                        class="input-new-tag"
+                        v-if="inputVisible"
+                        v-model="inputValue"
+                        ref="saveTagInput"
+                        size="mini"
+                        @keyup.enter.native="handleInputConfirm"
+                        @blur="handleInputConfirm">
+                  
+                    </el-input>
+                    <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
+                </el-form-item>
+                <el-button type ="danger" plain @click="postIdea(idea)">Create Idea</el-button> 
+                <el-button type ="info" plain @click="navigate('new-idea')"> Abort </el-button>          
+            </el-form>
+        </div>    
+    </el-main>
+</el-container>
+
+ 
+<el-tag
+ 
+</el-tag>

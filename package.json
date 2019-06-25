@@ -1,0 +1,31 @@
+{
+    "name": "vue-template",
+    "version": "1.0.0",
+    "description": "A template which shows how a Vue website can be built without the need for Babel or WebPack",
+    "author": "Benjamin Pannell <admin@sierrasoftworks.com>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/SierraSoftworks/vue-template.git"
+    },
+    "license": "MIT",
+    "scripts": {
+        "start": "node dev.js",
+        "build": "tsc"
+    },
+    "devDependencies": {
+        "@types/highlight.js": "^9.12.3",
+        "@types/markdown-it": "0.0.7",
+        "@types/moment": "^2.13.0",
+        "@types/requirejs": "^2.1.31",
+        "browser-sync": "^2.26.5",
+        "connect-history-api-fallback": "^1.6.0",
+        "typescript": "^3.5.1",
+        "vue": "^2.6.10",
+        "vue-class-component": "^7.1.0",
+        "vue-router": "^3.0.6",
+        "vuex": "^3.1.1"
+    },
+    "dependencies": {
+        "@johmun/vue-tags-input": "^2.0.1"
+    }
+}

@@ -1,0 +1,10 @@
+<el-container v-loading="idea == null">
+    <el-header>
+        <h1>{{ idea && idea.name || 'Loading...' }}</h1>
+    </el-header>
+    <el-main>
+        <div v-if="idea !== null">
+            <markdown :value="idea.description"></markdown>
+        </div>
+    </el-main>
+</el-container>

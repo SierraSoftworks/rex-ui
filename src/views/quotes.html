@@ -1,0 +1,12 @@
+<el-container>
+    <el-header>
+        <h1>Quote</h1>
+    </el-header>
+    <el-main>
+        <p v-if="quote !== null">
+            <markdown :value="quote.quote"></markdown>
+            <br/>
+            <strong>{{quote.who}}</strong>
+        </p>
+    </el-main>
+</el-container>
