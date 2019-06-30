@@ -22,12 +22,13 @@
                         {{tag}}</el-tag>
                     <el-input
                         class="input-new-tag"
+                        type="text"
                         v-if="inputVisible"
                         ref="saveTagInput"
                         size="mini"
+                        v-model="inputValue"
                         @keyup.enter.native="handleInputConfirm"
                         @blur="handleInputConfirm">
-                  
                     </el-input>
                     <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
                 </el-form-item>
@@ -39,6 +40,3 @@
 </el-container>
 
  
-<el-tag
- 
-</el-tag>

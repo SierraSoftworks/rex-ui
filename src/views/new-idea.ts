@@ -30,9 +30,8 @@ export default class NewIdeaView extends Vue {
 
     postIdea(idea: IdeaV2) {
         postIdeaV2(idea).then(i => {
-            //navigate to idea page
+            this.resetform();
         }).catch(err => console.error(err));
-        //this.resetform.
     }
     navigate(name: string, opts?: RawLocation) {
         if (~name.indexOf("://")) return window.open(name, "_blank")
@@ -60,11 +59,12 @@ export default class NewIdeaView extends Vue {
         this.inputVisible = false;
         this.inputValue = '';
     }
+
     resetform() {
+        console.log("resetting form")
         this.idea.name = ""
         this.idea.description = ""
         this.idea.tags = []
         this.idea.completed = false
-
     }
 }
