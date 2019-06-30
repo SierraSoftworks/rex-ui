@@ -137,3 +137,8 @@ a.el-button {
     margin-left: 10px;
     vertical-align: bottom;
 }
+
+.username-block {
+    padding: 20px;
+    font-size: 14px;
+}

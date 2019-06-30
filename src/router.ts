@@ -33,6 +33,7 @@ const routes = [
     { name: 'home', path: "/", component: asyncComponent("views/home") },
     { name: 'quotes', path: "/quotes", component: asyncComponent("views/quotes") },
     { name: 'ideas', path: "/ideas", component: asyncComponent("views/ideas") },
+    { name: 'created-idea', path: "/created-idea", component: asyncComponent("views/created-idea") },
     { name: 'new-idea', path: "/new-idea", component: asyncComponent("views/new-idea") }
 ]
 

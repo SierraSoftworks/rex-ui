@@ -6,6 +6,7 @@ import "./views/index";
 
 import { store } from "./store";
 import { router } from "./router";
+import authManager from "./api/auth";
 
 export const app = new Vue({
     el: "#app",
@@ -23,7 +24,7 @@ export const app = new Vue({
         },
 
         username() {
-            return this.$store.state.username
+            return authManager.getUsername()
         },
         error() {
             return this.$store.state.requestError
@@ -40,6 +41,9 @@ export const app = new Vue({
         }
     },
     methods: {
+
+    },
+    mounted() {
 
     }
 })

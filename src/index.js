@@ -15,7 +15,8 @@ require.config({
         "moment": "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min",
         "markdown-it": "https://cdnjs.cloudflare.com/ajax/libs/markdown-it/8.4.2/markdown-it.min",
         "text": "https://cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text.min",
-        "highlight-js": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min"
+        "highlight-js": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min",
+        "Msal": "https://secure.aadcdn.microsoftonline-p.com/lib/1.0.2/js/msal.min"
     },
     map: {
         "*": {

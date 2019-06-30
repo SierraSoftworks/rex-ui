@@ -48,6 +48,11 @@
                                 Quotes
                             </el-menu-item>
                         </el-menu>
+
+                        <div class="username-block" v-if="username">
+                            <i class="material-icons">verified_user</i>
+                            {{ username }}
+                        </div>
                     </el-col>
                 </el-row>
             </el-aside>
