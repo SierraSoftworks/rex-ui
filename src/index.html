@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Rex</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.12.0/theme-chalk/index.css"
+        integrity="sha256-kT8DBelODIz+oKtixLutvoa1K1zWiToaN0DUlaEAUVU=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/index.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <div id="app">
+        <el-container class="app">
+            <el-header class="header" height="65px">
+                <h2>
+                    <router-link :to="{ name: 'home' }" class="header__name">REX</router-link>
+
+                    <span v-if="collection">
+                        <span class="header__separator">/</span>
+                        <span class="header__collection">{{ collection.name }}</span>
+                    </span>
+
+                    <span v-if="user">
+                        <span class="header__separator">::</span>
+                        <span class="header__user">{{ user.name }}</span>
+                    </span>
+                </h2>
+
+                <div class="header-menu">
+                    <router-link :to="{ name: 'new', params: { collectionId: collection.id } }" v-if="collection"><i
+                            class="el-icon-plus"></i></router-link>
+                    <router-link :to="{ name: 'collections' }" v-if="user"><i class="el-icon-document-copy"></i>
+                    </router-link>
+                </div>
+            </el-header>
+            <el-main class="content" v-loading="loading">
+                <router-view :key="$route.fullPath"></router-view>
+            </el-main>
+        </el-container>
+    </div>
+
+    <script src='https://js.sentry-cdn.com/3330aefdcea7464796738536acee686d.min.js' crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"
+        integrity="sha256-1fEPhSsRKlFKGfK3eO710tEweHh1fwokU5wFGDHO+vg=" crossorigin="anonymous"
+        data-main="/index.js"></script>
+    <script src="/bundle.js"></script>
+</body>
+
+</html>

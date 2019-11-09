@@ -1,0 +1,9 @@
+<div class="idea">
+    <h2 class="idea__title">
+        {{ idea && idea.name }}
+
+        <el-tag v-for="tag in (idea && idea.tags || [])" :key="tag">{{ tag }}</el-tag>
+    </h2>
+
+    <markdown class="idea__description" :value="idea && idea.description || ''"></markdown>
+</div>

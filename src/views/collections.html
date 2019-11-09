@@ -1,0 +1,22 @@
+<el-container>
+    <el-header>
+        <h1>Collections</h1>
+    </el-header>
+    <el-main>
+        <p>
+            Collections allow you to organize and share your ideas with others.
+        </p>
+
+        <div v-for="collection in collections" :key="collection.id">
+            <h4>{{ collection.name }}</h4>
+            <el-button-group>
+                <el-button type="primary" icon="el-icon-document"
+                    @click="navigate('collection', { params: { collectionId: collection.id } })">Open</el-button>
+                <el-button icon="el-icon-document-add"
+                    @click="navigate('new', { params: { collectionId: collection.id } })">New
+                    Idea</el-button>
+                <el-button icon="el-icon-document-checked">Manage</el-button>
+            </el-button-group>
+        </div>
+    </el-main>
+</el-container>
