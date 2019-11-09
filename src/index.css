@@ -144,7 +144,7 @@ pre > code {
 
 .idea__title::before {
     position: absolute;
-    content: "“";
+    content: "\201C";
     display: inline-block;
     opacity: 0.3;
     font-weight: 400;
