@@ -53,6 +53,10 @@ stages:
 
                   containers: |
                     $(image):$(tag)
+          postRouteTraffic:
+            steps:
+              - pwsh: Invoke-WebRequest -UseBasicParsing https://staging.rex.sierrasoftworks.com/
+                displayName: Confirm Website is Available
 
 - stage: deploy_prod
   displayName: Deploy (Production)
@@ -76,3 +80,7 @@ stages:
                   manifests: $(Pipeline.Workspace)/manifests/*.yml
                   containers: |
                     $(image):$(tag)
+          postRouteTraffic:
+            steps:
+              - pwsh: Invoke-WebRequest -UseBasicParsing https://rex.sierrasoftworks.com/
+                displayName: Confirm Website is Available
