@@ -49,7 +49,7 @@ stages:
                 inputs:
                   action: deploy
                   namespace: $(namespace.staging)
-                  manifests: manifests/*.yml
+                  manifests: $(Pipeline.Workspace)/manifests/*.yml
 
                   containers: |
                     $(image):$(tag)
@@ -73,6 +73,6 @@ stages:
                 inputs:
                   action: deploy
                   namespace: $(namespace.prod)
-                  manifests: manifests/*.yml
+                  manifests: $(Pipeline.Workspace)/manifests/*.yml
                   containers: |
                     $(image):$(tag)
