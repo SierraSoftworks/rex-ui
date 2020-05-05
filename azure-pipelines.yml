@@ -50,7 +50,7 @@ stages:
                 inputs:
                   action: deploy
                   namespace: $(namespace.staging)
-                  manifests: deploy/deployment.yml|deploy/service.yml
+                  manifests: $(Pipeline.Workspace)/deploy/deployment.yml|$(Pipeline.Workspace)/deploy/service.yml
                   containers: |
                     $(image):$(tag)
 
@@ -74,6 +74,6 @@ stages:
                 inputs:
                   action: deploy
                   namespace: $(namespace.prod)
-                  manifests: ./.deploy/deployment.yml|./.deploy/service.yml
+                  manifests: $(Pipeline.Workspace)/deploy/deployment.yml|$(Pipeline.Workspace)/deploy/service.yml
                   containers: |
                     $(image):$(tag)
