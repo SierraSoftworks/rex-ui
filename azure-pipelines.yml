@@ -1,0 +1,76 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  tag: '$(Build.BuildId)'
+  image: sierrasoftworks/rex-ui
+  namespace.staging: rex-staging
+  namespace.prod: rex-prod
+
+stages:
+- stage: build
+  displayName: Build
+  jobs:  
+  - job: build_docker
+    displayName: Build Docker Image
+    steps:
+    - task: Docker@2
+      displayName: Build Docker Image
+      inputs:
+        command: buildAndPush
+        dockerfile: 'Dockerfile'
+        containerRegistry: Docker Hub
+        repository: $(image)
+        tags: |
+          latest
+          $(tag)
+
+- stage: deploy_staging
+  displayName: Deploy (Staging)
+  dependsOn:
+    - build
+  jobs:
+    - deployment: deploy_staging
+      displayName: Deploy Staging
+      environment: staging-rex-sierrasoftworks-com.rex-staging
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+              - checkout: self
+              - task: KubernetesManifest@0
+                name: deploy
+                displayName: Deploy 
+                inputs:
+                  action: deploy
+                  namespace: $(namespace.staging)
+                  manifests: ./.deploy/deployment.yml|./deploy/service.yml
+                  containers: |
+                    $(image):$(tag)
+
+- stage: deploy_prod
+  displayName: Deploy (Production)
+  dependsOn:
+    - build
+    - deploy_staging
+  jobs:
+    - deployment: deploy_prod
+      displayName: Deploy Production
+      environment: rex-sierrasoftworks-com.rex-prod
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+              - checkout: self
+              - task: KubernetesManifest@0
+                name: deploy
+                displayName: Deploy 
+                inputs:
+                  action: deploy
+                  namespace: $(namespace.prod)
+                  manifests: ./.deploy/deployment.yml|./deploy/service.yml
+                  containers: |
+                    $(image):$(tag)
