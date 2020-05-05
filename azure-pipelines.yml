@@ -43,14 +43,14 @@ stages:
         runOnce:
           deploy:
             steps:
-              - checkout: self
+              - script: ls -al
               - task: KubernetesManifest@0
                 name: deploy
                 displayName: Deploy 
                 inputs:
                   action: deploy
                   namespace: $(namespace.staging)
-                  manifests: $(Pipeline.Workspace)/deploy/deployment.yml|$(Pipeline.Workspace)/deploy/service.yml
+                  manifests: deploy/deployment.yml|deploy/service.yml
                   containers: |
                     $(image):$(tag)
 
@@ -67,13 +67,12 @@ stages:
         runOnce:
           deploy:
             steps:
-              - checkout: self
               - task: KubernetesManifest@0
                 name: deploy
                 displayName: Deploy 
                 inputs:
                   action: deploy
                   namespace: $(namespace.prod)
-                  manifests: $(Pipeline.Workspace)/deploy/deployment.yml|$(Pipeline.Workspace)/deploy/service.yml
+                  manifests: deploy/deployment.yml|deploy/service.yml
                   containers: |
                     $(image):$(tag)
