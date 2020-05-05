@@ -29,7 +29,7 @@ stages:
           $(tag)
 
     - publish: ./.deploy
-      artifact: deploy
+      artifact: manifests
 
 - stage: deploy_staging
   displayName: Deploy (Staging)
@@ -43,14 +43,14 @@ stages:
         runOnce:
           deploy:
             steps:
-              - script: ls -al
               - task: KubernetesManifest@0
                 name: deploy
                 displayName: Deploy 
                 inputs:
                   action: deploy
                   namespace: $(namespace.staging)
-                  manifests: deploy/deployment.yml|deploy/service.yml
+                  manifests: manifests/*.yml
+
                   containers: |
                     $(image):$(tag)
 
@@ -73,6 +73,6 @@ stages:
                 inputs:
                   action: deploy
                   namespace: $(namespace.prod)
-                  manifests: deploy/deployment.yml|deploy/service.yml
+                  manifests: manifests/*.yml
                   containers: |
                     $(image):$(tag)
