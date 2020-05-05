@@ -28,6 +28,9 @@ stages:
           latest
           $(tag)
 
+    - publish: ./.deploy
+      artifact: deploy
+
 - stage: deploy_staging
   displayName: Deploy (Staging)
   dependsOn:
@@ -47,7 +50,7 @@ stages:
                 inputs:
                   action: deploy
                   namespace: $(namespace.staging)
-                  manifests: ./.deploy/deployment.yml|./.deploy/service.yml
+                  manifests: deploy/deployment.yml|deploy/service.yml
                   containers: |
                     $(image):$(tag)
 
