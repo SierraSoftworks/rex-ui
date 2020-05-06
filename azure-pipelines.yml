@@ -1,86 +1,40 @@
 trigger:
 - master
 
-pool:
-  vmImage: 'ubuntu-latest'
-
 variables:
   tag: '$(Build.BuildId)'
   image: sierrasoftworks/rex-ui
-  namespace.staging: rex-staging
-  namespace.prod: rex-prod
 
-stages:
-- stage: build
-  displayName: Build
-  jobs:  
-  - job: build_docker
-    displayName: Build Docker Image
-    steps:
-    - task: Docker@2
-      displayName: Build Docker Image
-      inputs:
-        command: buildAndPush
-        dockerfile: 'Dockerfile'
-        containerRegistry: Docker Hub
-        repository: $(image)
-        tags: |
-          latest
-          $(tag)
-
-    - publish: ./.deploy
-      artifact: manifests
-
-- stage: deploy_staging
-  displayName: Deploy (Staging)
-  dependsOn:
-    - build
-  jobs:
-    - deployment: deploy_staging
-      displayName: Deploy Staging
+resources:
+  repositories:
+    - repository: templates
+      type: github
+      name: SierraSoftworks/devops-pipelines
+      endpoint: SierraSoftworks
+  
+extends:
+  template: kubernetes/app.yml@templates
+  parameters:
+    build:
+      - job: build_docker
+        displayName: Build Docker Image
+        steps:
+        - task: Docker@2
+          displayName: Build Docker Image
+          inputs:
+            command: buildAndPush
+            dockerfile: 'Dockerfile'
+            containerRegistry: Docker Hub
+            repository: $(image)
+            tags: |
+              latest
+              $(tag)
+    manifests: ./.deploy
+    containers: |
+      $(image):$(tag)
+    staging:
+      namespace: rex-staging
       environment: staging-rex-sierrasoftworks-com.rex-staging
-      strategy:
-        runOnce:
-          deploy:
-            steps:
-              - task: KubernetesManifest@0
-                name: deploy
-                displayName: Deploy 
-                inputs:
-                  action: deploy
-                  namespace: $(namespace.staging)
-                  manifests: $(Pipeline.Workspace)/manifests/*.yml
-
-                  containers: |
-                    $(image):$(tag)
-          postRouteTraffic:
-            steps:
-              - pwsh: Invoke-WebRequest -UseBasicParsing https://staging.rex.sierrasoftworks.com/
-                displayName: Confirm Website is Available
-
-- stage: deploy_prod
-  displayName: Deploy (Production)
-  dependsOn:
-    - build
-    - deploy_staging
-  jobs:
-    - deployment: deploy_prod
-      displayName: Deploy Production
+    production:
+      namespace: rex-prod
       environment: rex-sierrasoftworks-com.rex-prod
-      strategy:
-        runOnce:
-          deploy:
-            steps:
-              - task: KubernetesManifest@0
-                name: deploy
-                displayName: Deploy 
-                inputs:
-                  action: deploy
-                  namespace: $(namespace.prod)
-                  manifests: $(Pipeline.Workspace)/manifests/*.yml
-                  containers: |
-                    $(image):$(tag)
-          postRouteTraffic:
-            steps:
-              - pwsh: Invoke-WebRequest -UseBasicParsing https://rex.sierrasoftworks.com/
-                displayName: Confirm Website is Available
