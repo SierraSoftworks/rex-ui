@@ -31,6 +31,7 @@ function asyncComponent(module: string) {
 const routes = [
     { name: 'home', path: "/", component: asyncComponent("views/home") },
     { name: 'collection', path: "/collection/:collectionId", component: asyncComponent("views/home"), props },
+    { name: 'idea', path: "/collection/:collectionId/idea/:ideaId", component: asyncComponent("views/idea"), props },
     { name: 'new', path: "/collection/:collectionId/new", component: asyncComponent("views/new"), props },
     { name: 'collections', path: "/collections", component: asyncComponent("views/collections") }
 ]

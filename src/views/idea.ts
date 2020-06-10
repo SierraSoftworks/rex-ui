@@ -5,7 +5,7 @@ import { router } from "../router"
 
 import * as template from "text!./home.html"
 import { store, MUT_SET_COLLECTION } from "../store"
-import { getIdea, Idea, storeIdea } from "../api/ideas"
+import { getIdea, Idea, storeIdea, removeIdea } from "../api/ideas"
 import IdeaComponent from "../components/idea"
 import IdeaControlsComponent from "../components/idea-controls"
 
@@ -53,12 +53,18 @@ export default class IdeaView extends Vue {
         }, opts))
     }
 
-    async markCompleted() {
+    async markCompleted(complete: boolean) {
         if (!this.idea) return;
 
         this.idea = await storeIdea({
             ...this.idea,
-            completed: true
+            completed: complete
         })
+    }
+
+    async remove() {
+        await removeIdea(this.idea.id, this.idea.collection);
+
+        this.navigate("home", { params: { collectionId: this.idea.collection } })
     }
 }

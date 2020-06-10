@@ -1,7 +1,11 @@
 <div>
     <p v-if="idea" style="float: right; clear: both; padding: 20px;">
-        <el-button v-if="!idea.completed" icon="el-icon-check" @click="markComplete()">
+        <el-button v-if="allowComplete && !idea.completed" icon="el-icon-check" @click="markComplete()">
             Mark as Done
+        </el-button>
+
+        <el-button v-if="allowIncomplete && idea.completed" icon="el-icon-video-pause" @click="markIncomplete()">
+            Undo
         </el-button>
 
         <el-button v-if="allowDelete" icon="el-icon-delete" @click="remove()">

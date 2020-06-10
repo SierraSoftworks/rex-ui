@@ -64,12 +64,12 @@ export default class HomeView extends Vue {
         }, opts))
     }
 
-    async markCompleted() {
+    async markCompleted(completed: boolean) {
         if (!this.idea) return;
 
         this.idea = await storeIdea({
             ...this.idea,
-            completed: true
+            completed: completed
         })
     }
 

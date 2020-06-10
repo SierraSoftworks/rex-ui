@@ -7,6 +7,14 @@ import { Idea } from "../api/ideas"
     template,
     props: {
         idea: Object,
+        allowComplete: {
+            type: Boolean,
+            default: false
+        },
+        allowIncomplete: {
+            type: Boolean,
+            default: false
+        },
         allowNext: {
             type: Boolean,
             default: false
@@ -22,7 +30,11 @@ export default class IdeaControlsView extends Vue {
     allowNext!: boolean
 
     markComplete() {
-        this.$emit("completed")
+        this.$emit("complete")
+    }
+
+    markIncomplete() {
+        this.$emit("incomplete")
     }
 
     next() {
