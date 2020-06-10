@@ -5,13 +5,15 @@ import { router } from "../router"
 
 import * as template from "text!./home.html"
 import { store, MUT_SET_COLLECTION } from "../store"
-import { getIdea, Idea } from "../api/ideas"
+import { getIdea, Idea, storeIdea } from "../api/ideas"
 import IdeaComponent from "../components/idea"
+import IdeaControlsComponent from "../components/idea-controls"
 
 @Component({
     template,
     components: {
-        idea: IdeaComponent
+        idea: IdeaComponent,
+        "idea-controls": IdeaControlsComponent
     },
     props: {
         collectionId: {
@@ -49,5 +51,14 @@ export default class IdeaView extends Vue {
         router.push(Object.assign({
             name
         }, opts))
+    }
+
+    async markCompleted() {
+        if (!this.idea) return;
+
+        this.idea = await storeIdea({
+            ...this.idea,
+            completed: true
+        })
     }
 }

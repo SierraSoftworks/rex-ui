@@ -5,14 +5,17 @@ import { router } from "../router"
 
 import * as template from "text!./home.html"
 import { store, ACT_LOGIN, MUT_SET_COLLECTION } from "../store"
-import { getIdea, Idea } from "../api/ideas"
+import { getIdea, Idea, storeIdea } from "../api/ideas"
 import IdeaView from "../components/idea"
 import TagEditor from "../components/tag-editor"
 import { Collection } from "../api/collections"
+import IdeaControlsComponent from "../components/idea-controls"
+
 @Component({
     template,
     components: {
         idea: IdeaView,
+        "idea-controls": IdeaControlsComponent,
         "tag-editor": TagEditor
     },
     props: {
@@ -59,5 +62,18 @@ export default class HomeView extends Vue {
         router.push(Object.assign({
             name
         }, opts))
+    }
+
+    async markCompleted() {
+        if (!this.idea) return;
+
+        this.idea = await storeIdea({
+            ...this.idea,
+            completed: true
+        })
+    }
+
+    async next() {
+        this.idea = await getIdea("random", this.collection && this.collection.id)
     }
 }

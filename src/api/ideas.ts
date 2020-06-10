@@ -10,6 +10,7 @@ export interface IdeaV3 {
     name: string
     description: string
     tags?: string[]
+    completed?: boolean
 }
 
 export async function newIdea(idea: IdeaV3) {
@@ -58,4 +59,22 @@ export async function getIdeas(collectionId?: string) {
     })
 
     return await apiHandleResponse<IdeaV3[]>(res, true)
+}
+
+export async function storeIdea(idea: IdeaV3) {
+    let url = buildUrl(store.state.api, "api", "v3", "idea", idea.id)
+
+    if (idea.collection)
+        url = buildUrl(store.state.api, "api", "v3", "collection", idea.collection, "idea", idea.id)
+
+    const res = await fetch(url, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${await getAccessToken(Scope["Ideas.Write"])}`
+        },
+        body: JSON.stringify(idea)
+    })
+
+    return await apiHandleResponse<IdeaV3>(res, true)
 }

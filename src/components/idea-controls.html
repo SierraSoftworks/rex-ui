@@ -1,0 +1,12 @@
+<div>
+    <p v-if="idea" style="float: right; clear: both; padding: 20px;">
+        <el-button v-if="!idea.completed" icon="el-icon-check" @click="markComplete()">
+            Mark as Done
+        </el-button>
+
+        <el-button v-if="allowNext" icon="el-icon-arrow-right" @click="next()">
+            Next
+        </el-button>
+    </p>
+    </p>
+</div>

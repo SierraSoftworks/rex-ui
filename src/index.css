@@ -59,6 +59,13 @@ pre > code {
     transform: translate(-50%, -50%);
 }
 
+.bottom {
+    position: absolute;
+    bottom: 0%;
+    left: 0;
+    right: 0;
+}
+
 .header {
     font-family: 'Montserrat';
     padding: 0 20px;

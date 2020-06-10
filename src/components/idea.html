@@ -2,6 +2,8 @@
     <h2 class="idea__title">
         {{ idea && idea.name }}
 
+        <el-tag v-if="idea && idea.completed" type="success"><i class="el-icon-check"></i></el-tag>
+        
         <el-tag v-for="tag in (idea && idea.tags || [])" :key="tag">{{ tag }}</el-tag>
     </h2>
 
