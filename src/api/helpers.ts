@@ -45,12 +45,11 @@ export function apiHandleResponse<T>(res: Response, strict: boolean = false): Pr
             return Promise.reject(err)
         })
 
-    if (~res.headers.get("content-type").indexOf("application/json"))
+    if (~(res.headers.get("content-type") || "").indexOf("application/json"))
         return res.json()
 
     if (strict) return Promise.reject(new Error(`Received a non-JSON response`))
 
-    console.error("Received a non-JSON response")
     return res.text().then(text => ({
         text: text
     }))

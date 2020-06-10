@@ -4,6 +4,10 @@
             Mark as Done
         </el-button>
 
+        <el-button v-if="allowDelete" icon="el-icon-delete" @click="remove()">
+            Delete
+        </el-button>
+
         <el-button v-if="allowNext" icon="el-icon-arrow-right" @click="next()">
             Next
         </el-button>

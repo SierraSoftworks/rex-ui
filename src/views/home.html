@@ -9,6 +9,8 @@
     </div>
 
     <div class="bottom">
-        <idea-controls v-if="user" :idea="idea" @completed="markCompleted()" :allow-next="true" @next="next()"></idea-controls>
+        <idea-controls v-if="user" :idea="idea" @completed="markCompleted()"
+                        :allow-next="true" @next="next()"
+                        :allow-delete="true" @delete="remove()"></idea-controls>
     </div>
 </div>

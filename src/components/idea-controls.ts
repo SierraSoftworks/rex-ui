@@ -10,6 +10,10 @@ import { Idea } from "../api/ideas"
         allowNext: {
             type: Boolean,
             default: false
+        },
+        allowDelete: {
+            type: Boolean,
+            default: false
         }
     }
 })
@@ -23,5 +27,9 @@ export default class IdeaControlsView extends Vue {
 
     next() {
         this.$emit("next")
+    }
+
+    remove() {
+        this.$emit("delete")
     }
 }

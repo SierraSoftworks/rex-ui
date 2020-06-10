@@ -5,7 +5,7 @@ import { router } from "../router"
 
 import * as template from "text!./home.html"
 import { store, ACT_LOGIN, MUT_SET_COLLECTION } from "../store"
-import { getIdea, Idea, storeIdea } from "../api/ideas"
+import { getIdea, Idea, storeIdea, removeIdea } from "../api/ideas"
 import IdeaView from "../components/idea"
 import TagEditor from "../components/tag-editor"
 import { Collection } from "../api/collections"
@@ -75,5 +75,11 @@ export default class HomeView extends Vue {
 
     async next() {
         this.idea = await getIdea("random", this.collection && this.collection.id)
+    }
+
+    async remove() {
+        await removeIdea(this.idea.id, this.idea.collection);
+
+        await this.next()
     }
 }

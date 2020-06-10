@@ -78,3 +78,19 @@ export async function storeIdea(idea: IdeaV3) {
 
     return await apiHandleResponse<IdeaV3>(res, true)
 }
+
+export async function removeIdea(ideaId?: string, collectionId?: string) {
+    let url = buildUrl(store.state.api, "api", "v3", "idea", ideaId)
+
+    if (collectionId)
+        url = buildUrl(store.state.api, "api", "v3", "collection", collectionId, "idea", ideaId)
+
+    const res = await fetch(url, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${await getAccessToken(Scope["Ideas.Write"])}`
+        }
+    })
+
+    return await apiHandleResponse(res).then(() => true)
+}
