@@ -23,7 +23,7 @@ export async function getRoleAssignments(collectionId: string) {
 }
 
 export async function setRoleAssignment(roleAssignment: RoleAssignmentV3) {
-    const url = buildUrl(store.state.api, "api", "v3", "collection", roleAssignment.collectionId, "users")
+    const url = buildUrl(store.state.api, "api", "v3", "collection", roleAssignment.collectionId, "user", roleAssignment.userId)
     const res = await fetch(url, {
         method: "PUT",
         headers: {

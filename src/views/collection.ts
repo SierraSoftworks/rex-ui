@@ -4,7 +4,7 @@ import { RawLocation } from "vue-router"
 import { router } from "../router"
 
 import * as template from "text!./collection.html"
-import { store, MUT_SET_COLLECTION } from "../store"
+import { store, MUT_SET_COLLECTION, MUT_REQUEST_ERROR } from "../store"
 import { Collection, getCollection } from "../api/collections"
 import { Idea, getIdeas, storeIdea, removeIdea } from "../api/ideas"
 import { RoleAssignment, getRoleAssignments, removeRoleAssignment } from "../api/role-assignments"
@@ -39,9 +39,11 @@ export default class CollectionView extends Vue {
     async setCollection(id: string) {
         store.commit(MUT_SET_COLLECTION, id)
 
-        this.collection = await getCollection(this.collectionId)
-        this.users = await getRoleAssignments(this.collectionId)
-        this.ideas = await getIdeas(this.collectionId)
+        await Promise.all([
+            async () => this.collection = await getCollection(this.collectionId),
+            async () => this.users = await getRoleAssignments(this.collectionId),
+            async () => this.ideas = await getIdeas(this.collectionId),
+        ]).catch(err => store.commit(MUT_REQUEST_ERROR, err))
     }
 
     navigate(name: string, opts?: RawLocation) {
