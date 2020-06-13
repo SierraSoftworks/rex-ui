@@ -188,3 +188,12 @@ pre > code {
     margin-left: 10px;
     vertical-align: bottom;
 }
+
+.el-avatar {
+    vertical-align: middle;
+    margin: 20px
+}
+
+.el-select .el-input {
+    width: 140px;
+}

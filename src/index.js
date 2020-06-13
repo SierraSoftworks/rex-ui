@@ -40,6 +40,11 @@ require.config({
             name: "Msal",
             location: "https://alcdn.msauth.net/lib/1.1.3/js",
             main: "msal"
+        },
+        {
+            name: "spark-md5",
+            location: "https://cdnjs.cloudflare.com/ajax/libs/spark-md5/3.0.0",
+            main: "spark-md5.min"
         }
     ],
     shim: {

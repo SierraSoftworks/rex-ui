@@ -15,7 +15,8 @@
                 <el-button icon="el-icon-document-add"
                     @click="navigate('new', { params: { collectionId: collection.id } })">New
                     Idea</el-button>
-                <el-button icon="el-icon-document-checked">Manage</el-button>
+                <el-button icon="el-icon-document-checked"
+                    @click="navigate('manageCollection', { params: { collectionId: collection.id }})">Manage</el-button>
             </el-button-group>
         </div>
     </el-main>

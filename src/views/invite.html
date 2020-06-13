@@ -1,0 +1,21 @@
+<div class="fill">
+    <div class="center">
+        <h1>
+            <el-avatar :size="50" :src="avatarUrl" @error="avatarErrorHandler">
+                <img src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" alt="No avatar was found">
+            </el-avatar>
+
+            Invite {{ user && user.firstName || 'Someone' }}
+        </h1>
+        
+        <el-input v-model="emailAddress" placeholder="Email Address" clearable prefix-icon="el-icon-message">
+            <el-select v-model="role" slot="prepend" placeholder="Role">
+                <el-option v-for="r in roles" :key="r" :value="r" :label="r"></el-option>
+            </el-select>
+        </el-input>
+
+        <p style="text-align: center;">
+            <el-button v-if="user" @click="inviteUser">Invite</el-button>
+        </p>
+    </div>
+</div>

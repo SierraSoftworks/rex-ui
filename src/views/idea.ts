@@ -3,7 +3,7 @@ import Component from "vue-class-component"
 import { RawLocation } from "vue-router"
 import { router } from "../router"
 
-import * as template from "text!./home.html"
+import * as template from "text!./idea.html"
 import { store, MUT_SET_COLLECTION } from "../store"
 import { getIdea, Idea, storeIdea, removeIdea } from "../api/ideas"
 import IdeaComponent from "../components/idea"

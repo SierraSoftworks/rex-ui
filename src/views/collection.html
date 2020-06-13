@@ -1,0 +1,76 @@
+<div class="fill">
+    <div class="center" v-if="!collection">
+        Oops, it looks like the collection you're looking for could not be found.
+    </div>
+
+    <el-container v-if="collection">
+        <el-main>
+            <el-row :gutter="40">
+                <el-col :span="16">
+                    <h3>Ideas</h3>
+
+                    <el-table :data="ideas"
+                        :row-class-name="ideaRowClassName">
+                        <el-table-column prop="name"
+                            label="Name">
+                        </el-table-column>
+                        <el-table-column prop="tags"
+                            label="Tags">
+                            <template slot-scope="scope">
+                                <el-tag
+                                    v-for="tag in scope.row.tags"
+                                    :key="scope.row.id + ':' + tag"
+                                    disable-transitions>{{tag}}</el-tag>
+                            </template>
+                        </el-table-column>
+                        <el-table-column :width="200">
+                            <template slot-scope="scope">
+                                <el-button
+                                    size="mini"
+                                    v-if="!scope.row.completed"
+                                    icon="el-icon-check"
+                                    @click="markComplete(scope.row, true)"></el-button>
+                                <el-button
+                                    size="mini"
+                                    v-if="scope.row.completed"
+                                    icon="el-icon-video-pause"
+                                    @click="markComplete(scope.row, false)"></el-button>
+                                <el-button
+                                    size="mini"
+                                    type="danger"
+                                    icon="el-icon-delete"
+                                    @click="deleteIdea(scope.row)"></el-button>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </el-col>
+
+                <el-col :span="8">
+                    <h3>
+                        Users
+
+                        <el-button type="primary" circle @click="navigate('inviteUser', { params: { collectionId } })" icon="el-icon-plus"></el-button>
+                    </h3>
+
+                    <el-table :data="users">
+                        <el-table-column prop="userId"
+                            label="User ID">
+                        </el-table-column>
+                        <el-table-column prop="role"
+                            label="Role">
+                        </el-table-column>
+                        <el-table-column :width="200">
+                            <template slot-scope="scope">
+                                <el-button
+                                    size="mini"
+                                    type="danger"
+                                    icon="el-icon-delete"
+                                    @click="deleteUser(scope.row)"></el-button>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </el-col>
+            </el-row>
+        </el-main>
+    </el-container>
+</div>
