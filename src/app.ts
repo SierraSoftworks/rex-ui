@@ -6,6 +6,8 @@ import "./views/index";
 
 import { store, ACT_REFRESH } from "./store";
 import { router } from "./router";
+import SparkMD5 = require("spark-md5");
+import { Account } from "msal";
 
 export const app = new Vue({
     el: "#app",
@@ -21,20 +23,32 @@ export const app = new Vue({
         api() {
             return this.$store.state.api
         },
-
-        username() {
-            return this.$store.state.username
-        },
         error() {
             return this.$store.state.requestError
         },
 
-        user() {
+        user(): Account {
             return store.state.user
         },
 
         collection() {
             return store.getters.collection
+        },
+
+        firstName() {
+            if (!this.user) return "Nobody"
+
+            return this.user.name.split(' ')[0] || this.user.name
+        },
+
+        avatarUrl() {
+            if (this.user) {
+                const emailHash = SparkMD5.hash(this.user.userName.toLowerCase().trim())
+
+                return `https://www.gravatar.com/avatar/${emailHash}?s=50`
+            }
+
+            return "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
         }
     },
     mounted() {
