@@ -40,9 +40,9 @@ export default class CollectionView extends Vue {
         store.commit(MUT_SET_COLLECTION, id)
 
         await Promise.all([
-            async () => this.collection = await getCollection(this.collectionId),
-            async () => this.users = await getRoleAssignments(this.collectionId),
-            async () => this.ideas = await getIdeas(this.collectionId),
+            getCollection(this.collectionId).then(c => this.collection = c),
+            getRoleAssignments(this.collectionId).then(u => this.users = u),
+            getIdeas(this.collectionId).then(i => this.ideas = i),
         ]).catch(err => store.commit(MUT_REQUEST_ERROR, err))
     }
 
