@@ -37,6 +37,10 @@ export default class IdeaView extends Vue {
 
     idea: Idea = null
 
+    get user() {
+        return store.state.user
+    }
+
     async mounted() {
         this.collectionId && this.setCollection(this.collectionId)
         this.idea = await getIdea(this.ideaId, this.collectionId)
