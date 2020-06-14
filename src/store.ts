@@ -29,7 +29,7 @@ interface StoreData {
 
     user: Account
     collections: Collection[]
-    selectedCollection: string
+    selectedCollectionId: string
 }
 
 export const store = new Vuex.Store<StoreData>({
@@ -41,7 +41,7 @@ export const store = new Vuex.Store<StoreData>({
 
         user: getAccount(),
         collections: [],
-        selectedCollection: null
+        selectedCollectionId: null
     },
     mutations: {
         [MUT_SET_API](state, url: string) {
@@ -62,7 +62,7 @@ export const store = new Vuex.Store<StoreData>({
             state.collections = collections
         },
         [MUT_SET_COLLECTION](state, collectionId: string) {
-            state.selectedCollection = collectionId
+            state.selectedCollectionId = collectionId
         }
     },
     actions: {
@@ -90,8 +90,8 @@ export const store = new Vuex.Store<StoreData>({
     },
     getters: {
         collection(state) {
-            if (!state.selectedCollection) return state.collections[0]
-            return state.collections.find(c => c.id === state.selectedCollection)
+            if (!state.selectedCollectionId) return state.collections[0]
+            return state.collections.find(c => c.id === state.selectedCollectionId)
         }
     }
 })
