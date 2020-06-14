@@ -27,6 +27,9 @@
                 <div class="header-menu">
                     <router-link :to="{ name: 'new', params: { collectionId: collection.id } }" v-if="collection"><i
                             class="el-icon-plus"></i></router-link>
+                            
+                    <router-link :to="{ name: 'newCollection' }" v-if="user"><i class="el-icon-document-add"></i>
+                    </router-link>
                     <router-link :to="{ name: 'collections' }" v-if="user"><i class="el-icon-document-copy"></i>
                     </router-link>
 

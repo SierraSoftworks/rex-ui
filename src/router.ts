@@ -33,6 +33,7 @@ const routes = [
     { name: 'collection', path: "/collection/:collectionId", component: asyncComponent("views/home"), props },
     { name: 'idea', path: "/collection/:collectionId/idea/:ideaId", component: asyncComponent("views/idea"), props },
     { name: 'new', path: "/collection/:collectionId/new", component: asyncComponent("views/new"), props },
+    { name: 'newCollection', path: "/collections/new", component: asyncComponent("views/new-collection"), props },
     { name: 'collections', path: "/collections", component: asyncComponent("views/collections") },
     { name: 'manageCollection', path: "/collection/:collectionId/manage", component: asyncComponent("views/collection"), props },
     { name: 'inviteUser', path: "/collection/:collectionId/invite", component: asyncComponent("views/invite"), props }
