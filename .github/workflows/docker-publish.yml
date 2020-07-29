@@ -13,10 +13,6 @@ on:
   # Run tests for any PRs.
   pull_request:
 
-env:
-  # TODO: Change variable to your image's name.
-  IMAGE_NAME: sierrasoftworks/rex-ui
-
 jobs:
   # Run tests.
   # See also https://docs.docker.com/docker-hub/builds/automated-testing/
@@ -57,7 +53,7 @@ jobs:
 
       - name: Push image to GitHub
         run: |
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
+          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/ui
 
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
@@ -79,7 +75,7 @@ jobs:
 
       - name: Push image to Docker Hub
         run: |
-          IMAGE_ID=$IMAGE_NAME
+          IMAGE_ID=sierrasoftworks/rex-ui
 
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
