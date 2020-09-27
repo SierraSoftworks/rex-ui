@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 
 env:
-  MANIFESTS: ./.deploy/*.yml
+  MANIFESTS: ./.deploy
   IMAGE: sierrasoftworks/rex
 
   STAGING_CLUSTER: k8s-common
