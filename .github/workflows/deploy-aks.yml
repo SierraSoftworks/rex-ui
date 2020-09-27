@@ -9,7 +9,7 @@ env:
   MANIFESTS: |
     ./.deploy/deployment.yml
     ./.deploy/service.yml
-  IMAGE: sierrasoftworks/rex
+  IMAGE: sierrasoftworks/rex-ui
 
   STAGING_CLUSTER: k8s-common
   STAGING_RESOURCEGROUP: app-common
