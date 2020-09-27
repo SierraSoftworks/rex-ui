@@ -10,12 +10,12 @@ env:
   IMAGE: sierrasoftworks/rex
 
   STAGING_CLUSTER: k8s-common
-  STAGING_RESOURCEGROUP: apps-common
+  STAGING_RESOURCEGROUP: app-common
   STAGING_NAMESPACE: "rex-staging"
   STAGING_HEALTHCHECK: "https://staging.rex.sierrasoftworks.com/api/v1/health"
   
   LIVE_CLUSTER: k8s-common
-  LIVE_RESOURCEGROUP: apps-common
+  LIVE_RESOURCEGROUP: app-common
   LIVE_NAMESPACE: "rex-prod"
   LIVE_HEALTHCHECK: "https://rex.sierrasoftworks.com/api/v1/health"
 
