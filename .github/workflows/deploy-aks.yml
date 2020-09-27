@@ -14,12 +14,12 @@ env:
   STAGING_CLUSTER: k8s-common
   STAGING_RESOURCEGROUP: app-common
   STAGING_NAMESPACE: "rex-staging"
-  STAGING_HEALTHCHECK: "https://staging.rex.sierrasoftworks.com/api/v1/health"
+  STAGING_HEALTHCHECK: "https://staging.rex.sierrasoftworks.com/"
   
   LIVE_CLUSTER: k8s-common
   LIVE_RESOURCEGROUP: app-common
   LIVE_NAMESPACE: "rex-prod"
-  LIVE_HEALTHCHECK: "https://rex.sierrasoftworks.com/api/v1/health"
+  LIVE_HEALTHCHECK: "https://rex.sierrasoftworks.com/"
 
 jobs:
   test:
