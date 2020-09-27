@@ -60,7 +60,7 @@ jobs:
           
       - name: Push image to GitHub
         run: |
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/${{ github.repository.name }}
+          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/${{ github.event.repository.name }}
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
           docker tag image $IMAGE_ID:latest
           docker push $IMAGE_ID:latest
@@ -101,7 +101,7 @@ jobs:
           namespace: "${{ env.STAGING_NAMESPACE }}"
           manifests: "${{ env.MANIFESTS }}"
           images: |
-            "docker.pkg.github.com/${{ github.repository }}/${{ github.repository.name }}:${{ steps.version.outputs.version }}"
+            "docker.pkg.github.com/${{ github.repository }}/${{ github.event.repository.name }}:${{ steps.version.outputs.version }}"
   
   healthcheck-staging:
     needs: deploy-staging
@@ -142,7 +142,7 @@ jobs:
           namespace: "${{ env.LIVE_NAMESPACE }}"
           manifests: "${{ env.MANIFESTS }}"
           images: |
-            "docker.pkg.github.com/${{ github.repository }}/${{ github.repository.name }}:${{ steps.version.outputs.version }}"
+            "docker.pkg.github.com/${{ github.repository }}/${{ github.event.repository.name }}:${{ steps.version.outputs.version }}"
   
   healthcheck-live:
     needs: deploy-live
