@@ -36,12 +36,12 @@ spec:
           readinessProbe:
             httpGet:
               port: http
-              path: /api/v1/health
+              path: /
             initialDelaySeconds: 5
             periodSeconds: 1
           livenessProbe:
             httpGet:
               port: http
-              path: /api/v1/health
+              path: /
             initialDelaySeconds: 30
             periodSeconds: 1
