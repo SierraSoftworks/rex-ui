@@ -18,7 +18,7 @@
         "@types/punycode": "^2.1.0",
         "@types/requirejs": "^2.1.32",
         "@types/spark-md5": "^3.0.2",
-        "browser-sync": "^2.26.12",
+        "browser-sync": "^2.26.13",
         "connect-history-api-fallback": "^1.6.0",
         "dayjs": "^1.9.3",
         "msal": "^1.4.1",
