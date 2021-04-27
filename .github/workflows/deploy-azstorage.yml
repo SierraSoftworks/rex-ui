@@ -10,10 +10,12 @@ env:
   STAGING_STORAGE_CONTAINER: "$web"
   STAGING_STORAGE_ACCOUNT: "rexsierrasoftworksbeta"
   STAGING_CDN_RESOURCEGROUP: app-rex
+  STAGING_HEALTHCHECK: "https://rex-staging.sierrasoftworks.com/"
 
   LIVE_STORAGE_CONTAINER: "$web"
   LIVE_STORAGE_ACCOUNT: "sierrasoftworksrex"
   LIVE_CDN_RESOURCEGROUP: app-rex
+  LIVE_HEALTHCHECK: "https://rex.sierrasoftworks.com/"
   
 
 jobs:
@@ -43,6 +45,9 @@ jobs:
   deploy-staging:
     runs-on: ubuntu-latest
     needs: [build]
+    environment:
+      name: Staging
+      url: ${{ env.STAGING_HEALTHCHECK }}
     
     steps:
       - name: Download Artifacts for Website
@@ -62,11 +67,27 @@ jobs:
           inlineScript: |
             echo "Uploading Site Contents"
             az storage blob sync --container '${{ env.STAGING_STORAGE_CONTAINER }}' --account-name ${{ env.STAGING_STORAGE_ACCOUNT }} --source ./out
+            
+  healthcheck-staging:
+    needs: deploy-staging
+    runs-on: ubuntu-20.04
+    
+    steps:
+      - name: Probe
+        uses: Jtalk/url-health-check-action@1.5
+        with:
+          url: ${{ env.STAGING_HEALTHCHECK }}
+          max-attempts: 5
+          retry-delay: 10s
+          follow-redirect: true
 
   deploy-live:
     runs-on: ubuntu-latest
-    needs: [build, deploy-staging]
+    needs: healthcheck-staging
     if: github.event_name == 'push'
+    environment:
+      name: Production
+      url: ${{ env.LIVE_HEALTHCHECK }}
     
     steps:
       - name: Download Artifacts for Website
@@ -86,3 +107,16 @@ jobs:
           inlineScript: |
             echo "Uploading Site Contents"
             az storage blob sync --container '${{ env.LIVE_STORAGE_CONTAINER }}' --account-name ${{ env.LIVE_STORAGE_ACCOUNT }} --source ./out
+            
+  healthcheck-live:
+    needs: deploy-live
+    runs-on: ubuntu-20.04
+    
+    steps:
+      - name: Probe
+        uses: Jtalk/url-health-check-action@1.5
+        with:
+          url: ${{ env.LIVE_HEALTHCHECK }}
+          max-attempts: 5
+          retry-delay: 10s
+          follow-redirect: true
