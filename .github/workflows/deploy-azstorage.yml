@@ -62,7 +62,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           
       - name: Copy Artifacts to Storage
-        uses: azure/CLI@v1
+        uses: azure/CLI@1.0.4
         with:
           inlineScript: |
             echo "Uploading Site Contents"
@@ -102,7 +102,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           
       - name: Copy Artifacts to Storage
-        uses: azure/CLI@v1
+        uses: azure/CLI@1.0.4
         with:
           inlineScript: |
             echo "Uploading Site Contents"
