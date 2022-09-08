@@ -9,7 +9,7 @@ on:
 env:
   STAGING_DEPLOYMENT_CLIENT_ID: e0d46426-bd93-4bb2-9b5a-cabb0af9a509
   STAGING_STORAGE_CONTAINER: "$web"
-  STAGING_STORAGE_ACCOUNT: "rexsierrasoftworksbeta"
+  STAGING_STORAGE_ACCOUNT: "sierrasoftworksrexbeta"
   STAGING_CDN_RESOURCEGROUP: app-rex
   STAGING_HEALTHCHECK: "https://rex-staging.sierrasoftworks.com/"
 
