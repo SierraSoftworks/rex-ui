@@ -7,16 +7,20 @@ on:
     branches: [ main ]
 
 env:
+  STAGING_DEPLOYMENT_CLIENT_ID: e0d46426-bd93-4bb2-9b5a-cabb0af9a509
   STAGING_STORAGE_CONTAINER: "$web"
   STAGING_STORAGE_ACCOUNT: "rexsierrasoftworksbeta"
   STAGING_CDN_RESOURCEGROUP: app-rex
   STAGING_HEALTHCHECK: "https://rex-staging.sierrasoftworks.com/"
 
+  LIVE_DEPLOYMENT_CLIENT_ID: 25c19850-5c4e-4b6e-9257-a6e62b31e2e7
   LIVE_STORAGE_CONTAINER: "$web"
   LIVE_STORAGE_ACCOUNT: "sierrasoftworksrex"
   LIVE_CDN_RESOURCEGROUP: app-rex
   LIVE_HEALTHCHECK: "https://rex.sierrasoftworks.com/"
   
+permissions:
+  id-token: write
 
 jobs:
   build:
@@ -57,12 +61,13 @@ jobs:
           path: ./out
           
       - name: Login to Azure
-        uses: azure/login@v1.3.0
+        uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          subscription-id: "108b3ddb-53fb-4344-80b2-d6c151912be6"
+          tenant-id: "a26571f1-22b3-4756-ac7b-39ca684fab48"
+          client-id: ${{ env.STAGING_DEPLOYMENT_CLIENT_ID }}
           
       - name: Copy Artifacts to Storage
-        uses: azure/CLI@1.0.4
         with:
           inlineScript: |
             echo "Uploading Site Contents"
@@ -97,12 +102,13 @@ jobs:
           path: ./out
           
       - name: Login to Azure
-        uses: azure/login@v1.3.0
+        uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          subscription-id: "108b3ddb-53fb-4344-80b2-d6c151912be6"
+          tenant-id: "a26571f1-22b3-4756-ac7b-39ca684fab48"
+          client-id: ${{ env.LIVE_DEPLOYMENT_CLIENT_ID }}
           
       - name: Copy Artifacts to Storage
-        uses: azure/CLI@1.0.4
         with:
           inlineScript: |
             echo "Uploading Site Contents"
