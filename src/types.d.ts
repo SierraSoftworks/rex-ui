@@ -9,6 +9,6 @@ declare module "text!*!strip" {
 }
 
 declare module "highlight-js" {
-    import * as hljs from "highlight.js";
-    export = hljs;
+    import hljs from "highlight.js";
+    export default hljs;
 }

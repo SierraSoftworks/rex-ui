@@ -1,8 +1,8 @@
 require.config({
     paths: {
         "vue-class-component": "https://cdn.jsdelivr.net/npm/vue-class-component@7.1.0/dist/vue-class-component.min",
-        "highlight-js": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min",
-        "markdown-it": "https://cdnjs.cloudflare.com/ajax/libs/markdown-it/9.1.0/markdown-it.min",
+        "highlight-js": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min",
+        "markdown-it": "https://cdnjs.cloudflare.com/ajax/libs/markdown-it/13.0.1/markdown-it.min",
         "text": "https://cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text.min",
     },
     map: {
