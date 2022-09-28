@@ -32,7 +32,7 @@ jobs:
         submodules: true
 
     - name: Install Node.js
-      uses: actions/setup-node@v2.3.0
+      uses: actions/setup-node@v3.5.0
     
     - run: npm install
 
@@ -55,7 +55,7 @@ jobs:
     
     steps:
       - name: Download Artifacts for Website
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: site
           path: ./out
@@ -97,7 +97,7 @@ jobs:
     
     steps:
       - name: Download Artifacts for Website
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: site
           path: ./out
