@@ -33,7 +33,7 @@ require.config({
         },
         {
             name: "ELEMENT",
-            location: "https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.13.2",
+            location: "https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.12",
             main: "index"
         },
         {
