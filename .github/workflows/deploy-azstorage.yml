@@ -81,7 +81,7 @@ jobs:
     
     steps:
       - name: Probe
-        uses: Jtalk/url-health-check-action@v3.1
+        uses: Jtalk/url-health-check-action@v3.2
         with:
           url: ${{ env.STAGING_HEALTHCHECK }}
           max-attempts: 5
@@ -123,7 +123,7 @@ jobs:
     
     steps:
       - name: Probe
-        uses: Jtalk/url-health-check-action@v3.1
+        uses: Jtalk/url-health-check-action@v3.2
         with:
           url: ${{ env.LIVE_HEALTHCHECK }}
           max-attempts: 5
