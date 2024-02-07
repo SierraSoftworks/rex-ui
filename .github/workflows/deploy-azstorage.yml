@@ -32,7 +32,7 @@ jobs:
         submodules: true
 
     - name: Install Node.js
-      uses: actions/setup-node@v4.0.1
+      uses: actions/setup-node@v4.0.2
     
     - run: npm install
 
