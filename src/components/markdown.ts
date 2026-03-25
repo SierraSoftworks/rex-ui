@@ -1,6 +1,6 @@
 import Vue from "vue"
 import Component from "vue-class-component"
-import * as MarkdownIt from "markdown-it"
+import MarkdownIt from "markdown-it"
 import hljs from "highlight-js"
 
 @Component({

@@ -1,7 +1,7 @@
 import Vue from "vue"
 import * as dayjs from "dayjs"
-import * as dayjsrt from "dayjs/plugin/relativeTime"
-import * as dayjscal from "dayjs/plugin/calendar"
+import dayjsrt from "dayjs/plugin/relativeTime"
+import dayjscal from "dayjs/plugin/calendar"
 
 dayjs.extend(dayjsrt)
 dayjs.extend(dayjscal)
