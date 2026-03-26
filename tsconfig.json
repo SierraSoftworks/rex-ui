@@ -5,7 +5,7 @@
     "compilerOptions": {
         "target": "es6",
         "module": "amd",
-        "moduleResolution": "node",
+        "moduleResolution": "node10",
         "experimentalDecorators": true,
         "allowJs": true,
         "lib": [
@@ -13,7 +13,10 @@
             "dom"
         ],
         "types": ["requirejs"],
+        "rootDir": "src",
         "outFile": "src/bundle.js",
-        "sourceMap": true
+        "sourceMap": true,
+        "strict": false,
+        "ignoreDeprecations": "6.0"
     }
 }
