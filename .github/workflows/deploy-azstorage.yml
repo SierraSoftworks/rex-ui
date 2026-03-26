@@ -44,7 +44,7 @@ jobs:
         # Artifact name
         name: site
         # A file, directory or wildcard pattern that describes what to upload
-        path: ./src
+        path: ./dist
 
   deploy-staging:
     runs-on: ubuntu-latest
