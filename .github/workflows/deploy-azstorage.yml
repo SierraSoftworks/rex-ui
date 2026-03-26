@@ -72,8 +72,10 @@ jobs:
         uses: azure/CLI@v3
         with:
           inlineScript: |
+            echo "Clearing Existing Site Contents"
+            az storage blob delete-batch --source '${{ env.STAGING_STORAGE_CONTAINER }}' --account-name ${{ env.STAGING_STORAGE_ACCOUNT }} --auth-mode login
             echo "Uploading Site Contents"
-            az storage blob sync --container '${{ env.STAGING_STORAGE_CONTAINER }}' --account-name ${{ env.STAGING_STORAGE_ACCOUNT }} --source ./out
+            az storage blob upload-batch --destination '${{ env.STAGING_STORAGE_CONTAINER }}' --account-name ${{ env.STAGING_STORAGE_ACCOUNT }} --source ./out --overwrite --auth-mode login
             
   healthcheck-staging:
     needs: deploy-staging
@@ -114,8 +116,10 @@ jobs:
         uses: azure/CLI@v3
         with:
           inlineScript: |
+            echo "Clearing Existing Site Contents"
+            az storage blob delete-batch --source '${{ env.LIVE_STORAGE_CONTAINER }}' --account-name ${{ env.LIVE_STORAGE_ACCOUNT }} --auth-mode login
             echo "Uploading Site Contents"
-            az storage blob sync --container '${{ env.LIVE_STORAGE_CONTAINER }}' --account-name ${{ env.LIVE_STORAGE_ACCOUNT }} --source ./out
+            az storage blob upload-batch --destination '${{ env.LIVE_STORAGE_CONTAINER }}' --account-name ${{ env.LIVE_STORAGE_ACCOUNT }} --source ./out --overwrite --auth-mode login
             
   healthcheck-live:
     needs: deploy-live
