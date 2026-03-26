@@ -76,13 +76,25 @@ export default defineComponent({
             navigate("home", { params: { collectionId: idea.value!.collection } })
         }
 
+        async function loadIdea() {
+            idea.value = await getIdea(props.ideaId, props.collectionId)
+        }
+
         watch(() => props.collectionId, (id) => {
             if (id) setCollection(id)
         })
 
+        watch(user, async (newUser) => {
+            if (newUser && !idea.value) {
+                await loadIdea()
+            }
+        })
+
         onMounted(async () => {
             if (props.collectionId) setCollection(props.collectionId)
-            idea.value = await getIdea(props.ideaId, props.collectionId)
+            if (user.value) {
+                await loadIdea()
+            }
         })
 
         return {

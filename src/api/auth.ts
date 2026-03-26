@@ -23,6 +23,11 @@ export function getAccount(): AccountInfo | null {
     return accounts.length > 0 ? accounts[0] : null
 }
 
+export async function getAccountAsync(): Promise<AccountInfo | null> {
+    await msalInitialized
+    return getAccount()
+}
+
 export async function login(...scopes: Scope[]): Promise<AccountInfo> {
     await msalInitialized
 

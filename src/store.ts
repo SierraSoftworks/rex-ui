@@ -1,5 +1,5 @@
 import { createStore } from "vuex"
-import { login, Scope, logout, getAccount } from "./api/auth"
+import { login, Scope, logout, getAccount, getAccountAsync } from "./api/auth"
 import { AccountInfo } from "@azure/msal-browser"
 import { Collection, getCollections } from "./api/collections"
 
@@ -75,7 +75,14 @@ export const store = createStore<StoreData>({
         async [ACT_REFRESH](context) {
             context.commit(MUT_LOADING, true)
             try {
-                if (!context.state.user) throw new Error("You must be signed in first")
+                if (!context.state.user) {
+                    const account = await getAccountAsync()
+                    if (account) {
+                        context.commit(MUT_SET_USER, account)
+                    } else {
+                        return
+                    }
+                }
                 const collections = await getCollections()
                 context.commit(MUT_SET_COLLECTIONS, collections)
             } catch (err) {

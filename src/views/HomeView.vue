@@ -79,13 +79,25 @@ export default defineComponent({
             await next()
         }
 
+        async function loadIdea() {
+            idea.value = await getIdea("random", collection.value && collection.value.id)
+        }
+
         watch(() => props.collectionId, (id) => {
             if (id) setCollection(id)
         })
 
+        watch(user, async (newUser) => {
+            if (newUser && !idea.value) {
+                await loadIdea()
+            }
+        })
+
         onMounted(async () => {
             if (props.collectionId) setCollection(props.collectionId)
-            idea.value = await getIdea("random", collection.value && collection.value.id)
+            if (user.value) {
+                await loadIdea()
+            }
         })
 
         return {
