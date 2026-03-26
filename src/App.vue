@@ -96,3 +96,78 @@ export default defineComponent({
     }
 })
 </script>
+
+<style>
+.app {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.app > * {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    font-family: 'Montserrat';
+    padding: 0 20px;
+    border-bottom: 1px solid #f6f6f6;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.header-menu {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: flex-end;
+}
+
+.header-menu a {
+    text-decoration: none;
+    color: #444;
+    background: #fff;
+    line-height: var(--header-height);
+    padding: 0 20px;
+    vertical-align: middle;
+    transition: 0.25s ease background;
+}
+
+.header-menu a:hover {
+    background: #eee;
+}
+
+.header-menu div {
+    text-decoration: none;
+    color: #444;
+    background: #fff;
+    line-height: var(--header-height);
+    padding: 0 20px;
+    vertical-align: middle;
+}
+
+.header__name {
+    font-weight: 100;
+    text-decoration: none;
+    color: #000;
+}
+
+.header__separator {
+    opacity: 0.3;
+}
+
+.header__collection {
+    font-weight: 300;
+    text-transform: lowercase;
+}
+
+.content {
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+}
+</style>

@@ -30,3 +30,30 @@ export default defineComponent({
     }
 })
 </script>
+
+<style>
+.idea {
+    margin-left: 30px;
+    margin: 30px;
+    position: relative;
+    display: inline-block;
+    text-align: left;
+}
+
+.idea__title {
+    font-weight: 100;
+}
+
+.idea__title::before {
+    position: absolute;
+    content: "\201C";
+    display: inline-block;
+    opacity: 0.3;
+    font-weight: 400;
+    top: 10px;
+    left: -40px;
+    font-size: 40px;
+    width: 40px;
+    text-align: right;
+}
+</style>
