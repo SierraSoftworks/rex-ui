@@ -11,16 +11,22 @@
             </h2>
 
             <div class="header-menu">
-                <router-link :to="{ name: 'new', params: { collectionId: collection.id } }" v-if="collection">
-                    <el-icon><Plus /></el-icon>
-                </router-link>
+                <el-tooltip content="New Idea" placement="bottom" v-if="collection">
+                    <router-link :to="{ name: 'new', params: { collectionId: collection.id } }">
+                        <el-icon><Plus /></el-icon>
+                    </router-link>
+                </el-tooltip>
 
-                <router-link :to="{ name: 'newCollection' }" v-if="user">
-                    <el-icon><DocumentAdd /></el-icon>
-                </router-link>
-                <router-link :to="{ name: 'collections' }" v-if="user">
-                    <el-icon><DocumentCopy /></el-icon>
-                </router-link>
+                <el-tooltip content="New Collection" placement="bottom" v-if="user">
+                    <router-link :to="{ name: 'newCollection' }">
+                        <el-icon><DocumentAdd /></el-icon>
+                    </router-link>
+                </el-tooltip>
+                <el-tooltip content="View Collections" placement="bottom" v-if="user">
+                    <router-link :to="{ name: 'collections' }">
+                        <el-icon><DocumentCopy /></el-icon>
+                    </router-link>
+                </el-tooltip>
 
                 <div v-if="user">
                     <el-avatar :size="16" :src="avatarUrl"></el-avatar>
