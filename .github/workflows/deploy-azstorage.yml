@@ -79,7 +79,7 @@ jobs:
             
   healthcheck-staging:
     needs: deploy-staging
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     
     steps:
       - name: Probe
@@ -123,7 +123,7 @@ jobs:
             
   healthcheck-live:
     needs: deploy-live
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     
     steps:
       - name: Probe
