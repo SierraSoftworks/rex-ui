@@ -1,10 +1,7 @@
-import Vue from "vue";
-import * as Vuex from "vuex";
-import { login, Scope, logout, getAccessToken, getAccount } from "./api/auth";
-import { Account } from "msal";
-import { Collection, getCollections } from "./api/collections";
-
-Vue.use(Vuex);
+import { createStore } from "vuex"
+import { login, Scope, logout, getAccount } from "./api/auth"
+import { AccountInfo } from "@azure/msal-browser"
+import { Collection, getCollections } from "./api/collections"
 
 export const MUT_CONNECTED = "connected"
 export const MUT_DISCONNECTED = "disconnected"
@@ -27,12 +24,12 @@ interface StoreData {
     loading: boolean;
     requestError: Error;
 
-    user: Account
+    user: AccountInfo
     collections: Collection[]
     selectedCollectionId: string
 }
 
-export const store = new Vuex.Store<StoreData>({
+export const store = createStore<StoreData>({
     state: {
         api: localStorage.getItem("api:url") || window.location.origin,
         connected: false,
@@ -55,7 +52,7 @@ export const store = new Vuex.Store<StoreData>({
             state.loading = loading
         },
 
-        [MUT_SET_USER](state, user: Account) {
+        [MUT_SET_USER](state, user: AccountInfo) {
             state.user = user
         },
         [MUT_SET_COLLECTIONS](state, collections: Collection[]) {

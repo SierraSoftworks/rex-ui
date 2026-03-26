@@ -1,6 +1,6 @@
 <template>
     <div class="tag-editor">
-        <el-tag :key="tag" v-for="tag in modelValue" closable :disable-transitions="false" @close="handleClose(tag)">
+        <el-tag :key="String(tag)" v-for="tag in (modelValue as string[])" closable :disable-transitions="false" @close="handleClose(String(tag))">
             {{ tag }}
         </el-tag>
         <el-input class="input-new-tag" v-if="inputVisible" v-model="inputValue" ref="saveTagInput" size="small"

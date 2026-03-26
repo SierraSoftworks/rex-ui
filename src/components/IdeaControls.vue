@@ -51,6 +51,9 @@ export default defineComponent({
             default: false
         }
     },
-    emits: ["complete", "incomplete", "next", "delete"]
+    emits: ["complete", "incomplete", "next", "delete"],
+    setup() {
+        return { Check, VideoPause, Delete, ArrowRight }
+    }
 })
 </script>

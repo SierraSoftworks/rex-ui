@@ -1,7 +1,7 @@
 import { buildUrl, apiHandleResponse } from "./helpers"
 import { store } from "../store"
 import { getAccessToken, Scope } from "./auth"
-import SparkMD5 = require("spark-md5");
+import SparkMD5 from "spark-md5"
 
 export type User = UserV3;
 
