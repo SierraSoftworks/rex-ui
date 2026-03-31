@@ -18,9 +18,8 @@
         ],
         "types": ["vite/client"],
         "rootDir": ".",
-        "baseUrl": ".",
         "paths": {
-            "@/*": ["src/*"]
+            "@/*": ["./src/*"]
         },
         "sourceMap": true,
         "strict": false,
