@@ -14,7 +14,7 @@
         "preview": "vite preview"
     },
     "dependencies": {
-        "@azure/msal-browser": "^5.7.0",
+        "@azure/msal-browser": "^5.8.0",
         "@element-plus/icons-vue": "^2.3.1",
         "dayjs": "^1.11.20",
         "element-plus": "^2.13.7",
