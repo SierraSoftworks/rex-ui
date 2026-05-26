@@ -16,7 +16,7 @@
     "dependencies": {
         "@azure/msal-browser": "^5.11.0",
         "@element-plus/icons-vue": "^2.3.1",
-        "dayjs": "^1.11.20",
+        "dayjs": "^1.11.21",
         "element-plus": "^2.14.0",
         "highlight.js": "^11.11.1",
         "markdown-it": "^14.2.0",
