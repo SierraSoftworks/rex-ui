@@ -17,7 +17,7 @@
         "@azure/msal-browser": "^5.19.0",
         "@element-plus/icons-vue": "^2.3.1",
         "dayjs": "^1.11.23",
-        "element-plus": "^2.14.4",
+        "element-plus": "^2.14.5",
         "highlight.js": "^11.12.0",
         "markdown-it": "^15.0.0",
         "spark-md5": "^3.0.2",
