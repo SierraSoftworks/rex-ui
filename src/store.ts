@@ -64,9 +64,13 @@ export const store = createStore<StoreData>({
     },
     actions: {
         async [ACT_LOGIN](context) {
-            const account = await login(Scope["Ideas.Read"], Scope["Ideas.Write"], Scope["Collections.Read"], Scope["Collections.Write"], Scope["RoleAssignments.Write"])
-            context.commit(MUT_SET_USER, account)
-            context.dispatch(ACT_REFRESH)
+            try {
+                const account = await login(Scope["Ideas.Read"], Scope["Ideas.Write"], Scope["Collections.Read"], Scope["Collections.Write"], Scope["RoleAssignments.Write"])
+                context.commit(MUT_SET_USER, account)
+                context.dispatch(ACT_REFRESH)
+            } catch (err) {
+                context.commit(MUT_REQUEST_ERROR, err)
+            }
         },
         [ACT_LOGOUT](context) {
             logout()
